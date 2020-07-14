@@ -1,21 +1,37 @@
 // ExampleProject-BitwiseOperations.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include <string>
+#include <algorithm>
 #include <iostream>
+
+std::string ToBin(unsigned int n, int min_digits = 0)
+{
+    std::string bin_str;
+    for (int count = 0; n != 0 || count < min_digits; n >>= 1, count++)
+    {
+        bin_str.push_back(bool(n & 0b1) ? '1' : '0');
+    }
+    std::reverse(bin_str.begin(), bin_str.end());
+    return bin_str;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    //GitHub Test
+    //Intermediate C++ Game Programming DirectX [Bitwise Operations] Tutorial 23
+
+    const int a = 0b10100101;
+    const int b = 0b11110000;
+
+    std::cout << ToBin(a) << " <- a" << std::endl;
+    std::cout << ToBin(b) << " <- b" << std::endl;
+    std::cout << ToBin(a | b) << " <- a | b" << std::endl;
+    std::cout << ToBin(a & b) << " <- a & b" << std::endl;
+
+    const int c = 0b00001001;
+    std::cout << ToBin(c,8) << " <- c" << std::endl;
+    std::cout << ToBin(c << 4, 8) << " <- C << 4" << std::endl;
+
+    std::cin.get();
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
